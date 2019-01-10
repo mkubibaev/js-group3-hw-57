@@ -4,6 +4,7 @@ const Cost = props => {
 	return (
 		<div className="cost">
 			<span>{props.title}</span>
+			<span>{props.category}</span>
 			<div>
 				<span>{props.price} KGS</span>
 				<button onClick={props.remove}>x</button>

@@ -15,6 +15,15 @@ const CostAdd = props => {
 				type="text"
 				placeholder="cost price"
 			/>
+			<select
+				onChange={props.onSelectCategory}
+				value={props.currentCategory}
+			>
+				<option value="">select category</option>
+				{props.categories.map(category => (
+					<option key={category.id} value={category.name}>{category.name}</option>
+				))}
+			</select>
 			<button onClick={props.addCost}>Add</button>
 		</div>
 	);

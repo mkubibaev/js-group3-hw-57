@@ -2,11 +2,17 @@ import React, {Component} from 'react';
 import CostAdd from "../../components/CostAdd/CostAdd";
 import CostList from "../../components/CostList/CostList";
 
+const CATEGORIES = [
+	{id: 1, name: 'Entertainment', color: 'brown'},
+	{id: 2, name: 'Car', color: 'darkcyan'},
+	{id: 3, name: 'Food', color: 'orange'}
+];
 
 class CostsManager extends Component {
     state = {
         costTitle: '',
         costPrice: '',
+		costCategory: '',
         costList: [],
         sum: 0,
     };
@@ -27,8 +33,12 @@ class CostsManager extends Component {
 
 	};
 
+	selectCostCategory = event => {
+		this.setState({costCategory: event.target.value});
+	};
+
 	addCost = () => {
-		if (this.state.costTitle && this.state.costPrice) {
+		if (this.state.costTitle && this.state.costPrice && this.state.costCategory) {
 			const date = new Date();
 			const costList = [...this.state.costList];
 			const oldSum = this.state.sum;
@@ -36,7 +46,8 @@ class CostsManager extends Component {
 			const newCost = {
 				id: date.toISOString(),
 				title: this.state.costTitle,
-				price: this.state.costPrice
+				price: this.state.costPrice,
+				category: this.state.costCategory
 			};
 
 			costList.push(newCost);
@@ -45,6 +56,7 @@ class CostsManager extends Component {
 				costList,
 				costTitle: '',
 				costPrice: '',
+				costCategory: '',
 				sum
 			});
 		} else {
@@ -73,8 +85,11 @@ class CostsManager extends Component {
                 <CostAdd
 					currentTitle={this.state.costTitle}
 					currentPrice={this.state.costPrice}
+					currentCategory={this.state.costCategory}
 					onInputTitle={(event) => this.inputCostTitle(event)}
 					onInputPrice={(event) => this.inputCostPrice(event)}
+					onSelectCategory={(event) => this.selectCostCategory(event)}
+					categories={CATEGORIES}
 					addCost={this.addCost}
                 />
                 <CostList
