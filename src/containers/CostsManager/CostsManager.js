@@ -52,6 +52,21 @@ class CostsManager extends Component {
 		}
 	};
 
+	removeCost = id => {
+		const costList = [...this.state.costList];
+		const oldSum = this.state.sum;
+		const costIndex = costList.findIndex(cost => cost.id === id);
+		const costPrice = costList[costIndex].price;
+		const sum = oldSum - costPrice;
+
+		costList.splice(costIndex, 1);
+
+		this.setState({
+			costList,
+			sum
+		});
+	};
+
     render() {
         return (
             <div className="container">
@@ -64,6 +79,7 @@ class CostsManager extends Component {
                 />
                 <CostList
 					list={this.state.costList}
+					remove={this.removeCost}
 					totalSpent={this.state.sum}
                 />
             </div>

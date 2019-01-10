@@ -6,7 +6,7 @@ const Cost = props => {
 			<span>{props.title}</span>
 			<div>
 				<span>{props.price} KGS</span>
-				<button>x</button>
+				<button onClick={props.remove}>x</button>
 			</div>
 		</div>
 	);
