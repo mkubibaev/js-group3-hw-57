@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
+import CostsManager from "./containers/CostsManager/CostsManager";
 
 class App extends Component {
 	render() {
 		return (
-			<div className="App">
-
-			</div>
+			<CostsManager />
 		);
 	}
 }
