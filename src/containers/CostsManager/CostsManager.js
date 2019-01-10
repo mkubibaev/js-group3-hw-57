@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import CostAdd from "../../components/CostAdd/CostAdd";
+import CostList from "../../components/CostList/CostList";
 
 
 class CostsManager extends Component {
@@ -13,7 +15,8 @@ class CostsManager extends Component {
     render() {
         return (
             <div className="container">
-
+                <CostAdd/>
+                <CostList/>
             </div>
         )
     }
