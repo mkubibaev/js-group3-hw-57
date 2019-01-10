@@ -82,7 +82,7 @@ class CostsManager extends Component {
 			sum
 		});
 
-
+		this.calcChartSectors(costList, sum);
 	};
 
 	calcChartSectors = (costList, sum) => {
