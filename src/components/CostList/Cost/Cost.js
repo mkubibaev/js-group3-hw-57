@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Cost = () => {
+const Cost = props => {
 	return (
 		<div className="cost">
-			<span>title</span>
+			<span>{props.title}</span>
 			<div>
-				<span>123 KGS</span>
+				<span>{props.price} KGS</span>
 				<button>x</button>
 			</div>
 		</div>
