@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import CostAdd from "../../components/CostAdd/CostAdd";
 import CostList from "../../components/CostList/CostList";
+import CostChart from "../../components/CostChart/CostChart";
 
 const CATEGORIES = [
 	{id: 1, name: 'Entertainment', color: 'brown'},
@@ -15,6 +16,7 @@ class CostsManager extends Component {
 		costCategory: '',
         costList: [],
         sum: 0,
+        chartSectors: []
     };
 
 	inputCostTitle = event => {
@@ -59,6 +61,8 @@ class CostsManager extends Component {
 				costCategory: '',
 				sum
 			});
+
+			this.calcChartSectors(costList, sum);
 		} else {
 			alert('All fields required!');
 		}
@@ -77,7 +81,32 @@ class CostsManager extends Component {
 			costList,
 			sum
 		});
+
+
 	};
+
+	calcChartSectors = (costList, sum) => {
+	    const chartPercents = costList.reduce((acc, cost) => {
+	        if (cost.category in acc) {
+				acc[cost.category] += (cost.price * 100 / sum);
+            } else {
+				acc[cost.category] = (cost.price * 100 / sum);
+            }
+
+	        return acc;
+        }, {});
+
+		const chartSectors = Object.keys(chartPercents).map(chart => {
+		    return {
+		        name: chart,
+		        value: chartPercents[chart],
+                color: CATEGORIES.find(category => category.name === chart).color,
+            }
+
+        });
+
+	    this.setState({chartSectors});
+    };
 
     render() {
         return (
@@ -96,6 +125,10 @@ class CostsManager extends Component {
 					list={this.state.costList}
 					remove={this.removeCost}
 					totalSpent={this.state.sum}
+                />
+				<CostChart
+					categories={CATEGORIES}
+                    charts={this.state.chartSectors}
                 />
             </div>
         )
